@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Professional Emoji Chat</title>
+    <!-- Emoji Picker Web Component -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@1/index.js"></script>
+    <link rel="stylesheet" href="emoji.css">
+
+</head>
+
+<body>
+
+    <div class="chat-container">
+        <div class="chat-box" id="chatBox"></div>
+
+        <div class="chat-input-area">
+            <button id="emojiToggle"><img src="Assets/message.png" alt="logo" height="20px" width="20px"></button>
+            <input type="text" id="messageInput" placeholder="Type a message..." />
+            <button id="sendButton">Send</button>
+        </div>
+        
+        <emoji-picker id="emojiPicker"></emoji-picker>
+    </div>
+
+    <script>
+        const emojiToggle = document.getElementById('emojiToggle');
+        const emojiPicker = document.getElementById('emojiPicker');
+        const messageInput = document.getElementById('messageInput');
+        const chatBox = document.getElementById('chatBox');
+        const sendButton = document.getElementById('sendButton');
+        // Toggle emoji (on /off)
+        emojiToggle.addEventListener('click', () => {
+            emojiPicker.style.display = emojiPicker.style.display === 'none' ? 'block' : 'none';
+        });
+        // On emoji click, insert into input
+        emojiPicker.addEventListener('emoji-click', event => {
+            messageInput.value += event.detail.unicode;
+            messageInput.focus();
+        });
+        // Send message
+        sendButton.addEventListener('click', () => {
+            const msg = messageInput.value.trim();
+            if (msg !== '') {
+                const msgElem = document.createElement('div');
+                msgElem.className = 'message';
+                msgElem.innerText = msg;
+                chatBox.appendChild(msgElem);
+                chatBox.scrollTop = chatBox.scrollHeight;
+                messageInput.value = '';
+                messageInput.focus();
+            }
+        });
+    </script>
+</body>
+
+</html>

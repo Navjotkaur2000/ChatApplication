@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Forgot | ConnectMe</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #dce9fd;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 30px;
+      width: 360px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #3b82f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      height: 28px;
+      margin-right: 8px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #1a5eff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .login-link {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .login-link a {
+      color: #1a5eff;
+      text-decoration: none;
+    }
+
+    .message {
+      margin-top: 10px;
+      color: green;
+      font-size: 14px;
+    }
+
+    .error {
+      margin-top: 10px;
+      color: red;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="card">
+      <div class="logo">
+        <img src="./Assets/icon1.svg" alt="logo" />
+        ConnectMe
+      </div>
+      <h2>Recovery Password</h2>
+      <input type="email" id="resetEmail" placeholder="youremail@example.com">
+      <button onclick="sendResetPassword()">Reset Password</button>
+      <div id="message" class="message"></div>
+      <div id="error" class="error"></div>
+      <div class="login-link">
+        Some how remembered? <a href="index.html">Login</a>
+      </div>
+    </div>
+  </div>
+<script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-app-compat.js"></script>
+<!-- Firebase Auth -->
+<script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-auth-compat.js"></script>
+  <!-- Firebase Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+    import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+    
+    const firebaseConfig = {
+    apiKey: "AIzaSyA7BsGnLuFY6cWRk-Ggsd5B6ZV_l68trXg",
+      authDomain: "chatapplication-30a8f.firebaseapp.com",
+      databaseURL: "https://chatapplication-30a8f-default-rtdb.firebaseio.com",
+      projectId: "chatapplication-30a8f",
+      storageBucket: "chatapplication-30a8f.firebasestorage.app",
+      messagingSenderId: "719425389127",
+      appId: "1:719425389127:web:759c762e949a5451f2a762",
+      measurementId: "G-KEN0DNSQ5W"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.sendResetPassword = function () {
+      const email = document.getElementById("resetEmail").value;
+      const message = document.getElementById("message");
+      const error = document.getElementById("error");
+
+      message.textContent = "";
+      error.textContent = "";
+
+      if (!email) {
+        error.textContent = "Please enter your email.";
+        return;
+      }
+
+      sendPasswordResetEmail(auth, email)
+        .then(() => {
+          message.textContent = "Password reset link sent to your email.";
+        })
+        .catch((err) => {
+          error.textContent = err.message;
+        });
+    }
+
+
+  </script>
+
+</body>
+
+</html>

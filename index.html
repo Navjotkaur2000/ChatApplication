@@ -1,0 +1,247 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ConnectMe Login</title>
+    <style>
+        /* Your same styling here — no change needed */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #d6e1f7;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-box {
+            background-color: white;
+            border-radius: 8px;
+            width: 400px;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: 600;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 94%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .forgot {
+            text-align: right;
+            margin-top: 5px;
+            font-size: 13px;
+        }
+
+        .forgot a {
+            color: #1a5eff;
+            text-decoration: none;
+        }
+
+        .login-btn {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background-color: #1a5eff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            color: gray;
+            font-size: 12px;
+        }
+
+        .social-btns {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .social-btns button {
+            flex: 1;
+            padding: 10px;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: #f0f2f5;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+        }
+
+        .social-btns img {
+            height: 18px;
+            margin-right: 8px;
+        }
+
+        .register {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .register a {
+            color: #1a5eff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .main-logo {
+            position: absolute;
+            top: 16px;
+            left: 42%;
+            font-family: 'Inter', sans-serif;
+            font-size: 17px;
+            font-weight: 900;
+            width: 42px;
+        }
+
+        .logo-title {
+            position: absolute;
+            top: 14px;
+            left: 46%;
+            font-family: 'Inter', sans-serif;
+            font-size: 30px;
+            font-weight: 600;
+            width: 42px;
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img src="./Assets/icon1.svg" class="main-logo" />
+        <a href="TopNavigation.html" class="logo-title">connectMe</a>
+    </div>
+
+    <div class="container">
+        <div class="login-box">
+            <h3>Login</h3>
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="youremail@example.com">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="password">
+            <div class="forgot">
+                <a href="forgot.html">Forgot?</a>
+            </div>
+            <button class="login-btn" onclick="emailPasswordLogin()">Account Login</button>
+
+            <hr>
+            <div class="divider">OR USE WITH</div>
+            <div class="social-btns">
+                <button onclick="googleLogin()">
+                    <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" width="16"> Google
+                </button>
+                <button disabled>
+                    <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" width="16"> Facebook
+                </button>
+            </div>
+
+            <div class="register">
+                Don't have an account? <a href="./Register.html">Register</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA7BsGnLuFY6cWRk-Ggsd5B6ZV_l68trXg",
+            authDomain: "chatapplication-30a8f.firebaseapp.com",
+            databaseURL: "https://chatapplication-30a8f-default-rtdb.firebaseio.com",
+            projectId: "chatapplication-30a8f",
+            storageBucket: "chatapplication-30a8f.appspot.com",
+            messagingSenderId: "719425389127",
+            appId: "1:719425389127:web:759c762e949a5451f2a762",
+            measurementId: "G-KEN0DNSQ5W"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const provider = new GoogleAuthProvider();
+
+        // Email & Password Login
+        window.emailPasswordLogin = function () {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (!email || !password) {
+                alert("Please enter both email and password.");
+                return;
+            }
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    console.log("User signed in:", user.email);
+
+                    const userData = {
+                        email: user.email,
+                        uid: user.uid
+                    };
+
+                    localStorage.setItem('authUser', JSON.stringify(userData));
+                    alert("Login successful!");
+                    window.location.href = "dashboard.html";
+                })
+                .catch((error) => {
+                    console.error("Login failed:", error.message);
+                    alert("Invalid email or password.");
+                });
+        };
+
+        // Google Login
+        window.googleLogin = function () {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    const user = result.user;
+                    const userData = {
+                        email: user.email,
+                        name: user.displayName,
+                        photo: user.photoURL,
+                        uid: user.uid
+                    };
+
+                    localStorage.setItem('googleUser', JSON.stringify(userData));
+                    window.location.href = "dashboard.html";
+                })
+                .catch((error) => {
+                    console.error("Google login failed:", error.message);
+                    alert("Google login failed.");
+                });
+        };
+    </script>
+</body>
+
+</html>

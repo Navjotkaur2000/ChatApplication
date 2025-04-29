@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f2f6fc;
+            padding: 40px;
+            text-align: center;
+        }
+
+
+        h1 {
+            font-size: 28px;
+            color: #1a5eff;
+        }
+
+
+        img {
+            width: 100px;
+            border-radius: 50%;
+            margin-top: 20px;
+        }
+
+
+        p {
+            font-size: 16px;
+            color: #333;
+        }
+
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="card">
+        <h1 id="userName">Welcome</h1>
+        <img id="userPhoto" src="" alt="Profile Photo">
+        <p id="userEmail"></p>
+    </div>
+
+
+    <script>
+        const user = JSON.parse(localStorage.getItem('googleUser'));
+
+
+        if (user) {
+            document.getElementById("userName").textContent = "Welcome, " + user.name;
+            document.getElementById("userEmail").textContent = "Email: " + user.email;
+            document.getElementById("userPhoto").src = user.photo;
+        } else {
+            alert("No user found. Please login again.");
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+
+</html>

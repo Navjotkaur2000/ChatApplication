@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        .sidebar {
+            width: 280px;
+            height: 97vh;
+            font-family: sans-serif;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-section {
+            text-align: center;
+            position: relative;
+        }
+
+        .background-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            /* border-radius: 10px; */
+        }
+
+        .user-avataar {
+            width: 60px;
+            height: 60px;
+            left: 50%;
+            bottom: 61px;
+            transform: translateX(-50%);
+            border: 2px solid white;
+            border-radius: 10%;
+            position: absolute;
+        }
+
+        .profile-section h3 {
+            margin-top: 40px;
+            font-size: 18px;
+        }
+
+        .profile-section p {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .action-button {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 21px;
+            margin-left: 5px;
+            /* width: 270px; */
+            height:70px;
+            gap: 0.5rem;
+        }
+
+        .action-button button {
+            flex: 1;
+            margin: 0 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background: #f0f0f0;
+            cursor: pointer;
+        }
+   .action-button  i
+    {
+        width: 50px;
+        height: 50px;
+    }
+        .tabs
+        {
+            display: flex;
+            justify-content: space-around;
+            margin-top:15px;
+            font-weight: bold;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab span
+        {
+            padding: 10px;
+            cursor: pointer;
+
+        }
+        .tab .active-tab
+        {
+            color:blue;
+            border-bottom: 2px  solid blue;
+        }
+
+        .section
+        {
+            margin-top:20px;
+                }
+
+        .section h4
+        {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .themes
+        {
+            display: flex;
+            gap:10px;
+            cursor:pointer;
+        }
+
+        .theme{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 8px solid rgb(241 245 249);
+        }
+       .blue{
+            
+            background:conic-gradient( #fff 50% ,rgb(37 99 235) 50%);
+        }
+        .purple
+        {
+            background:conic-gradient( #fff 50%,rgb(79 70 229) 50%);  
+        }
+        .red
+        {
+ background:conic-gradient( #fff 50%, rgb(225 29 72) 50%);
+        }
+        .green
+         {
+             background:conic-gradient( #fff 50%, rgb(16 185 129)50%);
+         }
+         
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="profile-section">
+            <img src="./Assets/Dog.jpg" class="background-img" alt="dog-Image">
+            <img src="./Assets/user.jpg" class="user-avataar" alt="user-Profile">
+            <h3>Konstantin Frank</h3>
+            <p>Active Now</p>
+        </div>
+
+        <!-- mute media option plane working here -->
+
+        <div class="action-button">
+            <button><i class="bi bi-bell-fill"></i><br>Mute</button>
+            <button><i class="bi bi-images"></i><br>Media</button>
+            <button><i class="bi bi-sliders"></i><br>Options</button>
+        </div>
+
+        <!-- working wiith customize and manage tabs -->
+        <div class="tabs">
+            <span class="active-tab">Customize</span>
+            <span class="active-tab">Manage</span>
+        </div>
+
+        <!-- customize section part -->
+        <div class="section">
+            <h4>CHANGE THEME</h4>
+            <div class="themes">
+                <div class="theme blue"></div>
+                <div class="theme purple"></div>
+                <div class="theme green"></div>
+                <div class="theme red"></div>
+           
+                
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

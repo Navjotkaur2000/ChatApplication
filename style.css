@@ -1,0 +1,99 @@
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-color: #f4f7f9;
+}
+
+.sidebar {
+    /* padding: 16px; */
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+}
+
+.sidebar input {
+    width: 240px;
+    padding: 10px 35px;
+    margin-left: -20px;
+    font-size: 15px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.sidebar .fa-search {
+  position: relative;
+  top: 90%;
+  left: 15px;
+  color: #999;
+  font-size: 16px;
+}
+
+.user-list {
+    padding: 10px 0;
+    background-color: white;
+    width: 100%;
+    max-width: 350px;
+    margin-left: 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+.user {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.user:hover {
+    background-color: #f0f4fa;
+}
+
+.user img {
+    width: 48px;
+    height: 48px;
+    border-radius: 10%;
+    margin-right: 12px;
+}
+
+.user-info {
+    flex: 1;
+}
+
+.user-info h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-info h3 .fa-check-circle {
+    color: #1877f2;
+    margin-left: 6px;
+    font-size: 14px;
+}
+
+.status-text {
+    font-size: 14px;
+    color:green;
+    margin: 4px 0 0;
+}
+
+.last-active {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 2px;
+}
+
+.status-text-offline
+{
+     font-size: 14px;
+    color: #666;;
+    margin: 4px 0 0;
+}
+
