@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat UI Clone</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f4f7f9;
+        }
+
+        .chat-container {
+            max-width: 850px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-header {
+            background-color: #fff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .chat-header img {
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            margin-right: 10px;
+        }
+
+        .search-box {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .chat-body {
+            background-color: #e0efff;
+            padding: 20px;
+        }
+
+        .message {
+            margin-bottom: 20px;
+        }
+
+        .message.incoming .message-content,
+        .message.outgoing .message-content {
+            border-radius: 10px;
+            padding: 10px 15px;
+            max-width: 75%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .message.incoming {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .message.incoming img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .message.incoming .message-content {
+            background-color: #fff;
+        }
+
+        .message.outgoing {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .message.outgoing .message-content {
+            background-color: #057aff;
+            color: #fff;
+        }
+
+        .timestamp {
+            font-size: 12px;
+            color: gray;
+            margin-top: 5px;
+        }
+
+        .call-box {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .call-icon {
+            font-size: 20px;
+            margin-right: 10px;
+            color: #333;
+        }
+
+        .chat-footer {
+            border-top: 1px solid #ddd;
+            background-color: #fff;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .chat-footer input[type="text"] {
+            flex: 1;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 0 10px;
+        }
+
+        .chat-footer button {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="user-info">
+                <img src="https://i.pravatar.cc/48?img=10" alt="User">
+                <div>
+                    <div><strong>Jasmine Thompson</strong></div>
+                    <small class="text-success">Active</small>
+                </div>
+            </div>
+            <div>
+                <button class="btn"><i class="fas fa-phone"></i></button>
+            <button class="btn"><i class="fas fa-video"></i></button>
+                <button class="btn" onclick="toggleSearch()"><i class="fas fa-search"></i></button>
+                <button class="btn"><i class="fas fa-copy"></i></button>
+            </div>
+        </div>
+
+        <div class="px-3 search-box" id="searchBox">
+            <input type="text" class="form-control" id="searchInput" placeholder="Search messages..."
+                oninput="searchMessages()">
+        </div>
+
+        <div class="chat-body" id="chatBody">
+            <div class="message incoming">
+                <img src="https://i.pravatar.cc/48?img=10" alt="Profile">
+                <div class="message-content">
+                    <a
+                        href="https://www.envato.com/atomic-power-plant-engine/">https://www.envato.com/atomic-power-plant-engine/</a>
+                    <div>I hope these article helps.</div>
+                </div>
+            </div>
+
+            <div class="message outgoing">
+                <div class="message-content">
+                    Do you know which App or feature it will require to set up.
+                    <div class="timestamp">Aug 22, 2022, 3:05 PM</div>
+                </div>
+            </div>
+
+            <div class="call-box">
+                <div class="call-icon"><i class="fas fa-phone"></i></div>
+                <div>
+                    <div><strong>Outgoing Audio Call</strong></div>
+                    <div class="timestamp">03:29 PM</div>
+                </div>
+            </div>
+
+            <div class="call-box">
+                <div class="call-icon"><i class="fas fa-phone-slash"></i></div>
+                <div>
+                    <div><strong>Missed Audio Call</strong></div>
+                    <div class="timestamp">03:29 PM</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-footer">
+            <button><i class="fas fa-plus"></i></button>
+            <button><i class="far fa-smile"></i></button>
+            <button><i class="fas fa-paperclip"></i></button>
+            <input type="text" placeholder="Type a message...">
+            <button><i class="fas fa-microphone"></i></button>
+            <button><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        function toggleSearch() {
+            const box = document.getElementById('searchBox');
+            box.style.display = box.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function searchMessages() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const messages = document.querySelectorAll('.message-content');
+
+            messages.forEach(msg => {
+                const text = msg.innerText.toLowerCase();
+                msg.parentElement.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        }
+    </script>
+</body>
+
+</html>
